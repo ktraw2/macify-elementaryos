@@ -78,6 +78,7 @@ then
                 do
                     sed 's/Icon=\/home\/user/Icon=\/home\/'$USER'/' $f > .tempfile
                     cat .tempfile > $f
+                    chmod +x $f
                 done
                 rm .tempfile
                 cd $directory
@@ -86,10 +87,20 @@ then
             fi
         else
             echo "WARNING! Directory \"res/icons\" not found! macOS icons will not be copied!"
-        fi    
+        fi
+        if [ -d res/desktop-entries/default ]
+        then
+            cp res/desktop-entries/default/* ~/.local/share/applications/
+            for f in *.desktop
+            do
+                chmod +x $f
+            done
+        else
+            echo "WARNING! Directory \"res/desktop-entries/default\" not found! Nautilus file manager desktop entries will not be copied!"
+        fi
     else
         echo "WARNING! Directory \"res/\" not found! Custom wallpaper and desktop entries will not be set!"
-    fi    
+    fi
 else
     echo "This script must be run on ElementaryOS! Download it at elementary.io"
 fi
