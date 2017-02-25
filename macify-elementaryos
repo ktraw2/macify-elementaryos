@@ -46,6 +46,9 @@ then
     gsettings set org.gnome.desktop.wm.preferences theme $themestring
     gsettings set org.pantheon.desktop.gala.appearance button-layout "close,minimize,maximize"
     gsettings set org.pantheon.files.preferences single-click false
+    gsettings set org.pantheon.terminal.settings background "#FFFFFF"
+    gsettings set org.pantheon.terminal.settings cursor-color "#000000"
+    gsettings set org.pantheon.terminal.settings foreground "#000000"
     cd /usr/share/icons
     sudo git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git
     sudo chmod 755 la-capitaine-icon-theme/ -R
