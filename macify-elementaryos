@@ -64,17 +64,31 @@ then
             cp res/macOS-Sierra-Wallpaper.jpg ~/Pictures
             gsettings set org.gnome.desktop.background picture-uri "file:///home/"$USER"/Pictures/macOS-Sierra-Wallpaper.jpg"
         else
-            echo "WARNING! res/macOS-Sierra-Wallpaper.jpg not found! Custon wallpaper will not be set!"
+            echo "WARNING! File \"res/macOS-Sierra-Wallpaper.jpg\" not found! Custom wallpaper will not be set!"
         fi
-        #if [ -d res/icons/ -a "$extramac" = true ]
-        #then
-        #    mkdir ~/.icons/
-        #    cp -r res/icons/ ~/.icons/macOS
-        #    if [ -d res/desktop-entries/extra-mac/ ]
-        #    then
-        #        cp res/desktop-entries/extra-mac/* ~/.local/share/applications/   
+        if [ -d res/icons/ -a "$extramac" = true ]
+        then
+            mkdir ~/.icons/
+            cp -r res/icons/ ~/.icons/macOS
+            if [ -d res/desktop-entries/extra-mac/ ]
+            then
+                cp res/desktop-entries/extra-mac/* ~/.local/share/applications/
+                cd ~/.local/share/applications
+                for f in *.desktop
+                do
+                    sed 's/Icon=\/home\/user/Icon=\/home\/'$USER'/' $f > .tempfile
+                    cat .tempfile > $f
+                done
+                rm .tempfile
+                cd $directory
+            else
+                echo "WARNING! Directory \"res/desktop-entries/extra-mac/\" not found! macOS desktop entries will not be copied!"
+            fi
+        else
+            echo "WARNING! Directory \"res/icons\" not found! macOS icons will not be copied!"
+        fi    
     else
-        echo "WARNING! res/ directory not found! Custom wallpaper and desktop entries will not be set!"
+        echo "WARNING! Directory \"res/\" not found! Custom wallpaper and desktop entries will not be set!"
     fi    
 else
     echo "This script must be run on ElementaryOS! Download it at elementary.io"
