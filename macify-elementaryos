@@ -73,7 +73,7 @@ then
             if [ -d res/desktop-entries/extra-mac/ ]
             then
                 cp res/desktop-entries/extra-mac/* ~/.local/share/applications/
-                cd ~/.local/share/applications
+                cd ~/.local/share/applications/
                 for f in *.desktop
                 do
                     sed 's/Icon=\/home\/user/Icon=\/home\/'$USER'/' $f > .tempfile
@@ -91,12 +91,14 @@ then
         if [ -d res/desktop-entries/default ]
         then
             cp res/desktop-entries/default/* ~/.local/share/applications/
+            cd ~/.local/share/applications/
             for f in *.desktop
             do
                 chmod +x $f
             done
+            cd $directory
         else
-            echo "WARNING! Directory \"res/desktop-entries/default\" not found! Nautilus file manager desktop entries will not be copied!"
+            echo "WARNING! Directory \"res/desktop-entries/default\" not found! Desktop entries for Nautilus file manager will not be copied!"
         fi
     else
         echo "WARNING! Directory \"res/\" not found! Custom wallpaper and desktop entries will not be set!"
