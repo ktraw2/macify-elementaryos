@@ -45,6 +45,7 @@ then
     gsettings set org.gnome.desktop.interface gtk-theme $themestring
     gsettings set org.gnome.desktop.wm.preferences theme $themestring
     gsettings set org.pantheon.desktop.gala.appearance button-layout "close,minimize,maximize"
+    gsettings set org.pantheon.files.preferences single-click false
     cd /usr/share/icons
     sudo git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git
     sudo chmod 755 la-capitaine-icon-theme/ -R
