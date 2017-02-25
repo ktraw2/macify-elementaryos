@@ -44,6 +44,7 @@ then
     sudo chmod 755 macOS-Sierra-Dark/ -R
     gsettings set org.gnome.desktop.interface gtk-theme $themestring
     gsettings set org.gnome.desktop.wm.preferences theme $themestring
+    gsettings set org.pantheon.desktop.gala.appearance button-layout "close,minimize,maximize"
     cd /usr/share/icons
     sudo git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git
     sudo chmod 755 la-capitaine-icon-theme/ -R
@@ -61,8 +62,8 @@ then
     then
         if [ -e res/macOS-Sierra-Wallpaper.jpg ]
         then
-            cp res/macOS-Sierra-Wallpaper.jpg ~/Pictures
-            gsettings set org.gnome.desktop.background picture-uri "file:///home/"$USER"/Pictures/macOS-Sierra-Wallpaper.jpg"
+            sudo cp res/macOS-Sierra-Wallpaper.jpg /usr/share/backgrounds/
+            gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/macOS-Sierra-Wallpaper.jpg"
         else
             echo "WARNING! File \"res/macOS-Sierra-Wallpaper.jpg\" not found! Custom wallpaper will not be set!"
         fi
