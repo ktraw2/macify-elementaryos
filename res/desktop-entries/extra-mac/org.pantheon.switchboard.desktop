@@ -1,0 +1,20 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=System Preferences
+Comment=Change system and user settings
+Icon=/home/user/.icons/macOS/systempreferences.png
+Exec=switchboard %u
+NoDisplay=false
+Categories=GNOME;GTK;System;System-Tools;
+Keywords=Center;Control;Panel;Preferences;System;
+MimeType=x-scheme-handler/settings;
+StartupNotify=true
+Terminal=false
+
+Actions=AboutDialog;
+
+[Desktop Action AboutDialog]
+Name=About System Settings
+Exec=switchboard --about
+OnlyShowIn=Unity

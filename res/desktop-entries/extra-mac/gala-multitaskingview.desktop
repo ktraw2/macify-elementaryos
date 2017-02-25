@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Mission Control
+GenericName=Multitasking View
+Comment=View all open windows and workspaces
+Icon=/home/user/.icons/macOS/missioncontrol.png
+Exec=dbus-send --session --dest=org.pantheon.gala --print-reply /org/pantheon/gala org.pantheon.gala.PerformAction int32:1
+NoDisplay=false
+Categories=GNOME;GTK;System;System-Tools;
+StartupNotify=false
+Terminal=false

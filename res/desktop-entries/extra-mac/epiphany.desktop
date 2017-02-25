@@ -1,0 +1,26 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Safari
+GenericName=Web Browser
+Comment=Browse the web
+Icon=/home/user/.icons/macOS/safari.png
+Exec=epiphany %U
+NoDisplay=false
+Categories=GNOME;GTK;Network;WebBrowser;
+Keywords=web;browser;internet;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;multipart/related;application/x-mimearchive;message/rfc822;
+StartupNotify=true
+Terminal=false
+
+Actions=New;Incognito;
+
+[Desktop Action New]
+Name=New Window
+Exec=epiphany --new-window
+OnlyShowIn=Unity
+
+[Desktop Action Incognito]
+Name=New Incognito Window
+Exec=epiphany --incognito-mode
+OnlyShowIn=Unity

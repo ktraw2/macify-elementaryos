@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Mail
+Comment=Lightweight email client
+Icon=/home/user/.icons/macOS/mail.png
+TryExec=pantheon-mail
+Exec=pantheon-mail --hidden
+NoDisplay=true
+Categories=Email;GNOME;GTK;Network;
+Keywords=Email;E-mail;Mail;
+StartupNotify=true
+Terminal=false

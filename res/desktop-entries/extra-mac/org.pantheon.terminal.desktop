@@ -1,0 +1,31 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Terminal
+GenericName=Terminal
+Comment=Use the command line
+Icon=/home/user/.icons/macOS/terminal.png
+TryExec=pantheon-terminal
+Exec=pantheon-terminal
+NoDisplay=false
+Categories=GNOME;GTK;System;System-Tools;TerminalEmulator;
+Keywords=command;prompt;cmd;commandline;run;
+StartupNotify=true
+Terminal=false
+
+Actions=NewWindow;NewRootWindow;AboutDialog;
+
+[Desktop Action NewWindow]
+Name=New Window
+Exec=pantheon-terminal
+OnlyShowIn=Unity
+
+[Desktop Action NewRootWindow]
+Name=New Root Tab
+Exec=pantheon-terminal -e "sudo -s"
+OnlyShowIn=Unity
+
+[Desktop Action AboutDialog]
+Name=About Terminal
+Exec=pantheon-terminal --about
+OnlyShowIn=Unity

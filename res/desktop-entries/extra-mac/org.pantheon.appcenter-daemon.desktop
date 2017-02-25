@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=App Store
+Comment=Browse and manage apps
+Icon=/home/user/.icons/macOS/appstore.png
+Exec=appcenter -s
+NoDisplay=true
+Categories=X-GNOME-Other;
+StartupNotify=false
+Terminal=false

@@ -1,0 +1,81 @@
+#!/bin/bash
+directory="$(pwd)"
+release="$(cat /etc/os-release | grep 'NAME="elementary OS"')"
+if [ -n "$release" ]
+then
+    echo "You are using ElementaryOS. Customization will now start."
+    read -r -p "Do you want to install the latest LibreOffice? [Y/n] " response
+    if [[ "$response" =~ ^([nN][oO]|[nN])+$ ]]
+    then
+        libreoffice=false
+    else
+        libreoffice=true
+    fi
+    read -r -p "Do you want core system apps to be renamed to their macOS counterparts and use actual macOS icons? [Y/n] " response
+    if [[ "$response" =~ ^([nN][oO]|[nN])+$ ]]
+    then
+        extramac=false
+    else
+        extramac=true
+    fi
+    read -r -p "Which theme style would you like to use by default (can be changed later)? [LIGHT/dark] " response
+    if [[ "$response" =~ ^([dD][aA][rR][kK]|[dD])+$ ]]
+    then
+        themestring='macOS-Sierra-Dark'
+    else
+        themestring='macOS-Sierra'
+    fi
+    sudo apt install software-properties-common
+    sudo add-apt-repository -y ppa:philip.scott/elementary-tweaks
+    if [ "$libreoffice" = true ]
+    then
+        sudo add-apt-repository -y ppa:libreoffice/ppa
+    fi
+    sudo apt update
+    sudo apt install elementary-tweaks git
+    if [ "$libreoffice" = true ]
+    then
+        sudo apt install libreoffice
+    fi
+    cd /usr/share/themes
+    sudo git clone https://github.com/B00merang-Project/macOS-Sierra
+    sudo chmod 755 macOS-Sierra/ -R
+    sudo git clone https://github.com/B00merang-Project/macOS-Sierra-Dark
+    sudo chmod 755 macOS-Sierra-Dark/ -R
+    gsettings set org.gnome.desktop.interface gtk-theme $themestring
+    gsettings set org.gnome.desktop.wm.preferences theme $themestring
+    cd /usr/share/icons
+    sudo git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git
+    sudo chmod 755 la-capitaine-icon-theme/ -R
+    gsettings set org.gnome.desktop.interface icon-theme "la-capitaine-icon-theme"
+    gsettings set org.gnome.desktop.interface clock-format "12h"
+    cd ~/Downloads
+    wget https://github.com/KELiON/cerebro/releases/download/0.2.6/cerebro_0.2.6_amd64.deb
+    sudo dpkg -i cerebro_0.2.6_amd64.deb
+    sudo apt install -f
+    sudo apt install nautilus --no-install-recommends
+    gsettings set org.gnome.desktop.background show-desktop-icons true
+    gsettings set org.pantheon.desktop.cerbere monitored-processes "['wingpanel', 'plank', '"/opt/Cerebro/cerebro"', 'nautilus -n']"
+    cd $directory
+    if [ -d res/ ]
+    then
+        if [ -e res/macOS-Sierra-Wallpaper.jpg ]
+        then
+            cp res/macOS-Sierra-Wallpaper.jpg ~/Pictures
+            gsettings set org.gnome.desktop.background picture-uri "file:///home/"$USER"/Pictures/macOS-Sierra-Wallpaper.jpg"
+        else
+            echo "WARNING! res/macOS-Sierra-Wallpaper.jpg not found! Custon wallpaper will not be set!"
+        fi
+        #if [ -d res/icons/ -a "$extramac" = true ]
+        #then
+        #    mkdir ~/.icons/
+        #    cp -r res/icons/ ~/.icons/macOS
+        #    if [ -d res/desktop-entries/extra-mac/ ]
+        #    then
+        #        cp res/desktop-entries/extra-mac/* ~/.local/share/applications/   
+    else
+        echo "WARNING! res/ directory not found! Custom wallpaper and desktop entries will not be set!"
+    fi    
+else
+    echo "This script must be run on ElementaryOS! Download it at elementary.io"
+fi

@@ -1,0 +1,26 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Mail
+Comment=Lightweight email client
+Icon=/home/user/.icons/macOS/mail.png
+TryExec=pantheon-mail
+Exec=pantheon-mail %U
+NoDisplay=false
+Categories=Email;GNOME;GTK;Network;
+Keywords=Email;E-mail;Mail;
+MimeType=x-scheme-handler/mailto;
+StartupNotify=true
+Terminal=false
+
+Actions=Compose;AboutDialog;
+
+[Desktop Action Compose]
+Name=Compose Message
+Exec=pantheon-mail mailto:
+OnlyShowIn=Unity
+
+[Desktop Action AboutDialog]
+Name=About Mail
+Exec=pantheon-mail --about
+OnlyShowIn=Unity

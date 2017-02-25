@@ -1,0 +1,19 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=App Store
+Comment=Browse and manage apps
+Icon=/home/user/.icons/macOS/appstore.png
+Exec=appcenter %U
+NoDisplay=false
+Categories=GNOME;GTK;PackageManager;System;System-Tools;
+Keywords=install;uninstall;remove;catalogue;store;apps;updates;software;
+StartupNotify=true
+Terminal=false
+
+Actions=AboutDialog;
+
+[Desktop Action AboutDialog]
+Name=About AppCenter
+Exec=appcenter --about
+OnlyShowIn=Unity

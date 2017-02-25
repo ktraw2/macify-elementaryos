@@ -1,0 +1,21 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Photos
+GenericName=Photo Manager
+Comment=Organize your photos
+Icon=/home/user/.icons/macOS/photos.png
+Exec=pantheon-photos %U
+NoDisplay=false
+Categories=GNOME;GTK;Graphics;Photography;
+Keywords=album;cameras;crop;edit;enhance;export;gallery;images;import;organize;photographs;photos;pictures;photography;print;publish;rotate;share;tags;video;
+MimeType=x-content/image-dcf;
+StartupNotify=true
+Terminal=false
+
+Actions=AboutDialog;
+
+[Desktop Action AboutDialog]
+Name=About Photos
+Exec=pantheon-photos --about
+OnlyShowIn=Unity

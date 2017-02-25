@@ -1,0 +1,26 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Calendar
+GenericName=Calendar
+Comment=View and schedule events
+Icon=/home/user/.icons/macOS/calendar.png
+Exec=maya-calendar %U
+NoDisplay=false
+Categories=Calendar;GTK;Office;
+Keywords=Maya;Planner;Dates;Days;Events;Calendar;ics;caldav;evolution;
+MimeType=text/calendar;
+StartupNotify=true
+Terminal=false
+
+Actions=AddEvent;AboutDialog;
+
+[Desktop Action AddEvent]
+Name=Add Event
+Exec=maya-calendar -a
+OnlyShowIn=Unity
+
+[Desktop Action AboutDialog]
+Name=About Calendar
+Exec=maya-calendar --about
+OnlyShowIn=Unity

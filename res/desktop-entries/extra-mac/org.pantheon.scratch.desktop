@@ -1,0 +1,31 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=TextEdit
+GenericName=Text Editor
+Comment=Edit text files
+Icon=/home/user/.icons/macOS/textedit.png
+Exec=scratch-text-editor %U
+NoDisplay=false
+Categories=GNOME;GTK;TextEditor;Utility;
+Keywords=Notepad;IDE;Plain;
+MimeType=text/plain;
+StartupNotify=true
+Terminal=false
+
+Actions=NewDocument;NewWindow;AboutDialog;
+
+[Desktop Action NewDocument]
+Name=New Document
+Exec=scratch-text-editor --new-tab
+OnlyShowIn=Unity
+
+[Desktop Action NewWindow]
+Name=New Window
+Exec=scratch-text-editor --new-window
+OnlyShowIn=Unity
+
+[Desktop Action AboutDialog]
+Name=About Scratch
+Exec=scratch-text-editor --about
+OnlyShowIn=Unity

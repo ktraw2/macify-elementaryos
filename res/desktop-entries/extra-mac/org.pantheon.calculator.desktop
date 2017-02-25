@@ -1,0 +1,18 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Calculator
+Comment=Solve simple equations
+Icon=/home/user/.icons/macOS/calculator.png
+Exec=pantheon-calculator %U
+NoDisplay=false
+Categories=Calculator;GNOME;GTK;Utility;
+StartupNotify=true
+Terminal=false
+
+Actions=AboutDialog;
+
+[Desktop Action AboutDialog]
+Name=About Calculator
+Exec=pantheon-calculator --about
+OnlyShowIn=Unity
