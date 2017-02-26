@@ -35,9 +35,9 @@ then
     sudo apt install elementary-tweaks git
     if [ "$libreoffice" = true ]
     then
-        sudo apt install libreoffice
+        sudo apt install  libreoffice
     fi
-    cd /usr/share/themes
+    cd /usr/share/themes/
     sudo git clone https://github.com/B00merang-Project/macOS-Sierra
     sudo chmod 755 macOS-Sierra/ -R
     sudo git clone https://github.com/B00merang-Project/macOS-Sierra-Dark
@@ -49,19 +49,28 @@ then
     gsettings set org.pantheon.terminal.settings background "#FFFFFF"
     gsettings set org.pantheon.terminal.settings cursor-color "#000000"
     gsettings set org.pantheon.terminal.settings foreground "#000000"
+    gsettings set org.pantheon.desktop.wingpanel.indicators.power show-percentage true
     cd /usr/share/icons
     sudo git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git
     sudo chmod 755 la-capitaine-icon-theme/ -R
     gsettings set org.gnome.desktop.interface icon-theme "la-capitaine-icon-theme"
     gsettings set org.gnome.desktop.interface clock-format "12h"
-    cd ~/Downloads
+    cd $directory
+    if [ -e res/update-mac-skin ]
+    then
+        sudo cp res/update-mac-skin /usr/bin/
+        cd /usr/bin/
+        sudo chmod 755 ./update-mac-skin
+        cd $directory
+    else
+        else "File \"res/update-mac-skin\" does not exist! Skin updater will not be installed."
+    fi
     wget https://github.com/KELiON/cerebro/releases/download/0.2.6/cerebro_0.2.6_amd64.deb
     sudo dpkg -i cerebro_0.2.6_amd64.deb
     sudo apt install -f
     sudo apt install nautilus --no-install-recommends
     gsettings set org.gnome.desktop.background show-desktop-icons true
     gsettings set org.pantheon.desktop.cerbere monitored-processes "['wingpanel', 'plank', '"/opt/Cerebro/cerebro"', 'nautilus -n']"
-    cd $directory
     if [ -d res/ ]
     then
         if [ -e res/macOS-Sierra-Wallpaper.jpg ]
@@ -86,6 +95,13 @@ then
                     chmod +x $f
                 done
                 rm .tempfile
+                if [ -d res/plank ]
+                then
+                    rm ~/.config/plank/dock1/launchers/*
+                    cp res/plank/* ~/.config/plank/dock1/launchers/
+                else
+                    echo "WARNING! Directory \"res/plank/\" not found! Plank will not have its entries updated!"
+                fi
                 cd $directory
             else
                 echo "WARNING! Directory \"res/desktop-entries/extra-mac/\" not found! macOS desktop entries will not be copied!"
