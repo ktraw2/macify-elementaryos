@@ -79,9 +79,9 @@ then
     echo -e "\e[1;36m Installing Cerebro \e[0m"
     wget https://github.com/KELiON/cerebro/releases/download/0.2.6/cerebro_0.2.6_amd64.deb
     sudo dpkg -i cerebro_0.2.6_amd64.deb
-    sudo apt install -f
+    sudo apt install -y -f
     echo -e "\e[1;36m Installing and Configuring nautilus \e[0m"
-    sudo apt install nautilus --no-install-recommends
+    sudo apt install -y nautilus --no-install-recommends
     gsettings set org.gnome.desktop.background show-desktop-icons true
     gsettings set org.pantheon.desktop.cerbere monitored-processes ""
     if [ -d res/ ]
