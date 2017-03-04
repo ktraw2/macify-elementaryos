@@ -101,6 +101,14 @@ then
                     killall plank
                     rm ~/.config/plank/dock1/launchers/*
                     cp res/plank/* ~/.config/plank/dock1/launchers/
+                    cd ~/.config/plank/dock1/launchers/
+                    for f in *.dockitem
+                    do
+                        sed 's/\/home\/user/\/home\/'$USER'/' $f > .tempfile
+                        cat .tempfile > $f
+                        chmod +x $f
+                    done
+                    rm .tempfile
                 else
                     echo "WARNING! Directory \"res/plank/\" not found! Plank will not have its entries updated!"
                 fi
