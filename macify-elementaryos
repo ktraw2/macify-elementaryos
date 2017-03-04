@@ -63,14 +63,14 @@ then
         sudo chmod 755 ./update-mac-skin
         cd $directory
     else
-        else "File \"res/update-mac-skin\" does not exist! Skin updater will not be installed."
+        echo "File \"res/update-mac-skin\" does not exist! Skin updater will not be installed."
     fi
     wget https://github.com/KELiON/cerebro/releases/download/0.2.6/cerebro_0.2.6_amd64.deb
     sudo dpkg -i cerebro_0.2.6_amd64.deb
     sudo apt install -f
     sudo apt install nautilus --no-install-recommends
     gsettings set org.gnome.desktop.background show-desktop-icons true
-    gsettings set org.pantheon.desktop.cerbere monitored-processes "['wingpanel', 'plank', '"/opt/Cerebro/cerebro"', 'nautilus -n']"
+    gsettings set org.pantheon.desktop.cerbere monitored-processes ""
     if [ -d res/ ]
     then
         if [ -e res/macOS-Sierra-Wallpaper.jpg ]
@@ -97,6 +97,7 @@ then
                 rm .tempfile
                 if [ -d res/plank ]
                 then
+                    killall plank
                     rm ~/.config/plank/dock1/launchers/*
                     cp res/plank/* ~/.config/plank/dock1/launchers/
                 else
@@ -109,6 +110,7 @@ then
         else
             echo "WARNING! Directory \"res/icons\" not found! macOS icons will not be copied!"
         fi
+        gsettings set org.pantheon.desktop.cerbere monitored-processes "['wingpanel', 'plank', '"/opt/Cerebro/cerebro"', 'nautilus -n']"
         if [ -d res/desktop-entries/default ]
         then
             cp res/desktop-entries/default/* ~/.local/share/applications/
