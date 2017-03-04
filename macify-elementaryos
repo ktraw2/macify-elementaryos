@@ -25,51 +25,62 @@ then
     else
         themestring='macOS-Sierra'
     fi
-    sudo apt install software-properties-common
+    echo -e "\e[1;36m Installing software-properties-common \e[0m"
+    sudo apt install -y software-properties-common
     sudo add-apt-repository -y ppa:philip.scott/elementary-tweaks
     if [ "$libreoffice" = true ]
     then
         sudo add-apt-repository -y ppa:libreoffice/ppa
     fi
     sudo apt update
-    sudo apt install elementary-tweaks git
+    echo -e "\e[1;36m Installing elementary-tweaks and git \e[0m"
+    sudo apt install -y elementary-tweaks git
     if [ "$libreoffice" = true ]
     then
-        sudo apt install  libreoffice
+        echo -e "\e[1;36m Installing libreoffice \e[0m"
+        sudo apt install -y libreoffice
     fi
+    echo -e "\e[1;36m Installing macOS Sierra GTK Themes \e[0m"
     cd /usr/share/themes/
     sudo git clone https://github.com/B00merang-Project/macOS-Sierra
     sudo chmod 755 macOS-Sierra/ -R
     sudo git clone https://github.com/B00merang-Project/macOS-Sierra-Dark
     sudo chmod 755 macOS-Sierra-Dark/ -R
+    echo -e "\e[1;36m Setting GTK Theme \e[0m"
     gsettings set org.gnome.desktop.interface gtk-theme $themestring
     gsettings set org.gnome.desktop.wm.preferences theme $themestring
+    echo -e "\e[1;36m Setting Window Buttons \e[0m"
     gsettings set org.pantheon.desktop.gala.appearance button-layout "close,minimize,maximize"
     gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize"
     gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DecorationLayout': <'close,minimize,maximize:menu'>, 'Gtk/DialogsUseHeader': <0>, 'Gtk/ShellShowsAppMenu': <0>}"
+    echo -e "\e[1;36m Configuring Misc. Tweaks \e[0m"    
     gsettings set org.pantheon.files.preferences single-click false
     gsettings set org.pantheon.terminal.settings background "#FFFFFF"
     gsettings set org.pantheon.terminal.settings cursor-color "#000000"
     gsettings set org.pantheon.terminal.settings foreground "#000000"
     gsettings set org.pantheon.desktop.wingpanel.indicators.power show-percentage true
+    gsettings set org.gnome.desktop.interface clock-format "12h"
+    echo -e "\e[1;36m Installing La Capitaine Icon Pack \e[0m"    
     cd /usr/share/icons
     sudo git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git
     sudo chmod 755 la-capitaine-icon-theme/ -R
     gsettings set org.gnome.desktop.interface icon-theme "la-capitaine-icon-theme"
-    gsettings set org.gnome.desktop.interface clock-format "12h"
     cd $directory
     if [ -e res/update-mac-skin ]
     then
+        echo -e "\e[1;36m Installing Icon and GTK Theme Updater \e[0m"
         sudo cp res/update-mac-skin /usr/bin/
         cd /usr/bin/
         sudo chmod 755 ./update-mac-skin
         cd $directory
     else
-        echo "File \"res/update-mac-skin\" does not exist! Skin updater will not be installed."
+        echo -e "\e[1;41m WARNING! File \"res/update-mac-skin\" does not exist! Skin updater will not be installed. \e[0m"
     fi
+    echo -e "\e[1;36m Installing Cerebro \e[0m"
     wget https://github.com/KELiON/cerebro/releases/download/0.2.6/cerebro_0.2.6_amd64.deb
     sudo dpkg -i cerebro_0.2.6_amd64.deb
     sudo apt install -f
+    echo -e "\e[1;36m Installing and Configuring nautilus \e[0m"
     sudo apt install nautilus --no-install-recommends
     gsettings set org.gnome.desktop.background show-desktop-icons true
     gsettings set org.pantheon.desktop.cerbere monitored-processes ""
@@ -77,17 +88,20 @@ then
     then
         if [ -e res/macOS-Sierra-Wallpaper.jpg ]
         then
+            echo -e "\e[1;36m Setting Wallpaper \e[0m"
             sudo cp res/macOS-Sierra-Wallpaper.jpg /usr/share/backgrounds/
             gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/macOS-Sierra-Wallpaper.jpg"
         else
-            echo "WARNING! File \"res/macOS-Sierra-Wallpaper.jpg\" not found! Custom wallpaper will not be set!"
+            echo -e "\e[1;41m WARNING! File \"res/macOS-Sierra-Wallpaper.jpg\" not found! Custom wallpaper will not be set! \e[0m"
         fi
         if [ -d res/icons/ -a "$extramac" = true ]
         then
+            echo -e "\e[1;36m Copying extramac Icons \e[0m"
             mkdir ~/.icons/
             cp -r res/icons/ ~/.icons/macOS
             if [ -d res/desktop-entries/extra-mac/ ]
             then
+                echo -e "\e[1;36m Copying extramac Desktop Entries \e[0m"
                 cp res/desktop-entries/extra-mac/* ~/.local/share/applications/
                 cd ~/.local/share/applications/
                 for f in *.desktop
@@ -100,6 +114,7 @@ then
                 cd $directory
                 if [ -d res/plank/ ]
                 then
+                    echo -e "\e[1;36m Configuring plank for extramac \e[0m"
                     killall plank
                     rm ~/.config/plank/dock1/launchers/*
                     cp res/plank/* ~/.config/plank/dock1/launchers/
@@ -117,18 +132,21 @@ then
                     sleep 3
                     killall plank
                 else
-                    echo "WARNING! Directory \"res/plank/\" not found! Plank will not have its entries updated!"
+                    echo -e "\e[1;41m WARNING! Directory \"res/plank/\" not found! Plank will not have its entries updated! \e[0m"
                 fi
                 cd $directory
             else
-                echo "WARNING! Directory \"res/desktop-entries/extra-mac/\" not found! macOS desktop entries will not be copied!"
+                echo -e "\e[1;41m WARNING! Directory \"res/desktop-entries/extra-mac/\" not found! macOS desktop entries will not be copied! \e[0m"
             fi
         else
-            echo "WARNING! Directory \"res/icons\" not found! macOS icons will not be copied!"
+            echo -e "\e[1;41m WARNING! Directory \"res/icons\" not found! macOS icons will not be copied! \e[0m"
         fi
+        echo -e "\e[1;36m Configuring Cerebre \e[0m"
         gsettings set org.pantheon.desktop.cerbere monitored-processes "['wingpanel', 'plank', '"/opt/Cerebro/cerebro"', 'nautilus -n']"
+        killall wingpanel
         if [ -d res/desktop-entries/default ]
         then
+            echo -e "\e[1;36m Copying nautilus Desktop Entries \e[0m"
             cp res/desktop-entries/default/* ~/.local/share/applications/
             cd ~/.local/share/applications/
             for f in *.desktop
@@ -137,11 +155,11 @@ then
             done
             cd $directory
         else
-            echo "WARNING! Directory \"res/desktop-entries/default\" not found! Desktop entries for Nautilus file manager will not be copied!"
+            echo -e "\e[1;41m WARNING! Directory \"res/desktop-entries/default\" not found! Desktop entries for Nautilus file manager will not be copied! \e[0m"
         fi
     else
-        echo "WARNING! Directory \"res/\" not found! Custom wallpaper and desktop entries will not be set!"
+        echo -e "\e[1;41m WARNING! Directory \"res/\" not found! Custom wallpaper and desktop entries will not be set! \e[0m"
     fi
 else
-    echo "This script must be run on ElementaryOS! Download it at elementary.io"
+    echo -e "\e[1;41m This script must be run on ElementaryOS! Download it at elementary.io \e[0m"
 fi
