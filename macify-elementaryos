@@ -95,7 +95,8 @@ then
                     chmod +x $f
                 done
                 rm .tempfile
-                if [ -d res/plank ]
+                cd $directory
+                if [ -d res/plank/ ]
                 then
                     killall plank
                     rm ~/.config/plank/dock1/launchers/*
