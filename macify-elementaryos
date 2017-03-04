@@ -111,8 +111,10 @@ then
                     done
                     rm .tempfile
                     plank
-                    killall plank
+                    sleep 3
                     gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['org.pantheon.files.dockitem', 'gala-multitaskingview.dockitem', 'epiphany.dockitem', 'org.pantheon.mail.dockitem', 'maya-calendar.dockitem', 'org.pantheon.calculator.dockitem', 'org.pantheon.scratch.dockitem', 'org.pantheon.photos.dockitem', 'org.pantheon.noise.dockitem', 'org.pantheon.appcenter.dockitem', 'org.pantheon.terminal.dockitem', 'org.pantheon.switchboard.dockitem', 'trash.dockitem']"
+                    sleep 3
+                    killall plank
                 else
                     echo "WARNING! Directory \"res/plank/\" not found! Plank will not have its entries updated!"
                 fi
