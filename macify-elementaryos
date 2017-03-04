@@ -129,6 +129,8 @@ then
                     rm .tempfile
                     sleep 3
                     plank
+                    sleep 1
+                    killall plank
                     gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['org.pantheon.files.dockitem', 'gala-multitaskingview.dockitem', 'epiphany.dockitem', 'org.pantheon.mail.dockitem', 'maya-calendar.dockitem', 'org.pantheon.calculator.dockitem', 'org.pantheon.scratch.dockitem', 'org.pantheon.photos.dockitem', 'org.pantheon.noise.dockitem', 'org.pantheon.appcenter.dockitem', 'org.pantheon.terminal.dockitem', 'org.pantheon.switchboard.dockitem', 'trash.dockitem']"
                     sleep 3
                     killall plank
