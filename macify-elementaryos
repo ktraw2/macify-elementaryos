@@ -83,7 +83,7 @@ then
     echo -e "\e[1;36m Installing and Configuring nautilus \e[0m"
     sudo apt install -y nautilus --no-install-recommends
     gsettings set org.gnome.desktop.background show-desktop-icons true
-    gsettings set org.pantheon.desktop.cerbere monitored-processes ""
+    gsettings set org.pantheon.desktop.cerbere monitored-processes "[]"
     if [ -d res/ ]
     then
         if [ -e res/macOS-Sierra-Wallpaper.jpg ]
@@ -116,6 +116,7 @@ then
                 then
                     echo -e "\e[1;36m Configuring plank for extramac \e[0m"
                     killall plank
+                    sleep 3
                     rm ~/.config/plank/dock1/launchers/*
                     cp res/plank/* ~/.config/plank/dock1/launchers/
                     cd ~/.config/plank/dock1/launchers/
@@ -126,6 +127,7 @@ then
                         chmod +x $f
                     done
                     rm .tempfile
+                    sleep 3
                     plank
                     sleep 3
                     gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['org.pantheon.files.dockitem', 'gala-multitaskingview.dockitem', 'epiphany.dockitem', 'org.pantheon.mail.dockitem', 'maya-calendar.dockitem', 'org.pantheon.calculator.dockitem', 'org.pantheon.scratch.dockitem', 'org.pantheon.photos.dockitem', 'org.pantheon.noise.dockitem', 'org.pantheon.appcenter.dockitem', 'org.pantheon.terminal.dockitem', 'org.pantheon.switchboard.dockitem', 'trash.dockitem']"
