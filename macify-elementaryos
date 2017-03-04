@@ -45,6 +45,7 @@ then
     gsettings set org.gnome.desktop.interface gtk-theme $themestring
     gsettings set org.gnome.desktop.wm.preferences theme $themestring
     gsettings set org.pantheon.desktop.gala.appearance button-layout "close,minimize,maximize"
+    gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize"
     gsettings set org.pantheon.files.preferences single-click false
     gsettings set org.pantheon.terminal.settings background "#FFFFFF"
     gsettings set org.pantheon.terminal.settings cursor-color "#000000"
