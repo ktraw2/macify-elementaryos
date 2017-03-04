@@ -109,6 +109,7 @@ then
                         chmod +x $f
                     done
                     rm .tempfile
+                    gsettings set net.launchpad.plank.dock.settings:/dock1/ dock-items "['org.pantheon.files.dockitem', 'gala-multitaskingview.dockitem', 'maya-calendar.dockitem', 'org.pantheon.appcenter.dockitem', 'org.pantheon.calculator.dockitem', 'org.pantheon.mail.dockitem', 'org.pantheon.noise.dockitem', 'org.pantheon.photos.dockitem', 'org.pantheon.switchboard.dockitem', 'org.pantheon.terminal.dockitem', 'trash.dockitem']
                 else
                     echo "WARNING! Directory \"res/plank/\" not found! Plank will not have its entries updated!"
                 fi
